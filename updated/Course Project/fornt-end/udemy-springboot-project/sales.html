@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+
+</head>
+<body>
+
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+        <div class=" col-md-9 ">
+            <a href="index.html" class="btn btn-primary">Dashboard</a>
+            <a href="products.html" class="btn btn-success">Products</a>
+            <a href="sales.html" class="btn btn-warning">Sales</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>Order No</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="orders">
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <button class="btn btn-success btn-xs">View Details</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                    </tr>
+                    </thead>
+                    <tbody id="products">
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        getProducts();
+    });
+
+
+    function getProducts() {
+        let body = $("#orders").html('');
+        $.ajax({
+            url: 'http://localhost:8081/orders/get-orders',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (resp) {
+                for (let i = 0; i < resp.length; i++) {
+                    body += ' <tr id="row-' + resp[i].orderId + '">\n' +
+                        '                        <td>' + resp[i].orderId + '</td>\n' +
+                        '                        <td>' + resp[i].total + '</td>\n' +
+                        '                        <td>\n' +
+                        '                            <button onclick="getSales(' + resp[i].orderId + ')" class="btn btn-success btn-xs">View Action</button>\n' +
+                        '                        </td>\n' +
+                        '                    </tr>';
+
+                }
+                console.log(body);
+                $("#orders").html(body);
+            }
+        });
+    }
+
+    function getSales(orderId) {
+        let body = $("#products").html('');
+        $.ajax({
+            url: 'http://localhost:8081/sales/get-by-order-id?orderId='+orderId,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (resp) {
+                for (let i = 0; i < resp.length; i++) {
+                    body += ' <tr id="row-' + resp[i].product.productId + '">\n' +
+                        '                        <td>' + resp[i].product.productName + '</td>\n' +
+                        '                        <td>' + resp[i].product.productPrice + '</td>\n' +
+                        '                    </tr>';
+
+                }
+                console.log(body);
+                $("#products").html(body);
+            }
+        });
+    }
+
+</script>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+
+</head>
+<body>
+
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+        <div class=" col-md-9 ">
+            <a href="index.html" class="btn btn-primary">Dashboard</a>
+            <a href="products.html" class="btn btn-success">Products</a>
+            <a href="sales.html" class="btn btn-warning">Sales</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="products">
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Product Price</label>
+                <input type="text" id="productPrice" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="barcode">Product Barcode</label>
+                <input type="text" id="barcode" class="form-control">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" onclick="addProduct()">Save Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header btn-success">
+                <h5 class="modal-title" id="modalLabel">Update : <span id="mtProductName"></span></h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="mProductName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Product Price</label>
+                            <input type="text" id="mProductPrice" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="barcode">Product Barcode</label>
+                            <input type="text" id="mBarcode" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button onclick="saveUpdate()" type="button" class="btn btn-success">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        getProducts();
+    });
+
+    let prId = null;
+
+    function getProducts() {
+        let body = $("#products").html('');
+        $.ajax({
+            url: 'http://localhost:8081/products/get-all-products',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (resp) {
+                for (let i = 0; i < resp.length; i++) {
+                    body += ' <tr id="row-' + resp[i].productId + '">\n' +
+                        '                        <td>' + resp[i].productName + '</td>\n' +
+                        '                        <td>' + resp[i].productPrice + '</td>\n' +
+                        '                        <td>\n' +
+                        '                            <button onclick="deleteRow(' + resp[i].productId + ')" class="btn btn-danger btn-xs">X</button>\n' +
+                        '                            <button onclick="updateProduct(' + resp[i].productId + ')" class="btn btn-success btn-xs">Edit</button>\n' +
+                        '                        </td>\n' +
+                        '                    </tr>';
+
+                }
+                console.log(body);
+                $("#products").html(body);
+            }
+        });
+    }
+
+    function deleteRow(productId) {
+        $.ajax({
+            url: 'http://localhost:8081/products/delete-product?productId=' + productId,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (resp) {
+                getProducts();
+            }
+        });
+    }
+
+    function addProduct() {
+        let data = {
+            productName: $("#productName").val(),
+            productPrice: $("#productPrice").val(),
+            barcode: $("#barcode").val()
+        };
+        console.log(data);
+        $.ajax({
+            url: 'http://localhost:8081/products/add-product',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            data: JSON.stringify(data),
+            type: 'POST',
+            dataType: 'JSON',
+            success: function (resp) {
+                window.location.reload();
+            }
+        });
+    }
+
+    function updateProduct(productId) {
+        $("#updateModal").modal('show');
+
+        $.ajax({
+            url: 'http://localhost:8081/products/get-by-id?productId=' + productId,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (resp) {
+                prId = productId;
+                $("#mtProductName").html(resp.productName);
+                $("#mProductName").val(resp.productName);
+                $("#mProductPrice").val(resp.productPrice);
+                $("#mBarcode").val(resp.barcode);
+            }
+        });
+
+
+    }
+
+    function saveUpdate() {
+        let productName = $("#mProductName").val();
+        let productPrice = $("#mProductPrice").val();
+        let productBarcode = $("#mBarcode").val();
+        $.ajax({
+            url: 'http://localhost:8081/products/update-product',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'POST',
+            data: JSON.stringify({
+                productId: prId,
+                productName: productName,
+                productPrice: productPrice,
+                barcode: productBarcode
+            }),
+            dataType: 'JSON',
+            success: function (resp) {
+                getProducts();
+                $("#updateModal").modal('toggle');
+            }
+        });
+    }
+</script>
+
+</html>
