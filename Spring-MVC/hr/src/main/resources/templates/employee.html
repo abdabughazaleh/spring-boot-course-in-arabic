@@ -1,0 +1,29 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="layout/main">
+<head>
+    <title>Employee</title>
+</head>
+<div layout:fragment="content-body">
+    <table with="100%" border="1">
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Tel</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>Street</th>
+        </tr>
+        <tr th:each="userDetails : ${employees}">
+            <td th:text="${userDetails.getUsername()}"></td>
+            <td th:text="${userDetails.getEmail()}"></td>
+            <td th:text="${userDetails.getTel()}"></td>
+            <td th:text="${userDetails.getAge()}"></td>
+            <td th:text="${userDetails.getAddress().getCity()}"></td>
+            <td th:text="${userDetails.getAddress().getStreet()}"></td>
+        </tr>
+    </table>
+</div>
+
+<span layout:fragment="footer-text">
+    Employee Page
+</span>
+</html>

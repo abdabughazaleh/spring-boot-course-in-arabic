@@ -1,0 +1,29 @@
+.table-header {
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    text-align: left;
+}
+
+#email {
+    background-color: grey;
+}
+
+td {
+    background-color: lightgrey !important;
+}
+
+td {
+    background-color: blue;
+}
+
+tbody {
+    width: 500px;
+}
+
+.user-img {
+    width: 300px;
+    height: 300px;
+    border:10px dotted blue;
+    border-radius: 50%;
+}
