@@ -1,12 +1,10 @@
 package com.springcourse.hr.controller;
 
-import com.springcourse.hr.model.dto.AddressDTO;
-import com.springcourse.hr.model.dto.EmployeeDTO;
 import com.springcourse.hr.service.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -19,10 +17,10 @@ public class EmployeeController {
         model.addAttribute("employees", employeeService.getEmployees());
         return "employee";
     }
+
     @GetMapping("/user")
     public String user() {
         return "user";
     }
-
 
 }
