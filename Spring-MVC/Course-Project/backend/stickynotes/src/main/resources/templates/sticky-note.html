@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sub-title {
+            color: grey;
+            font-size: 20px;
+        }
+
+        .edit-btn {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<span layout:fragment="page-name">
+    Sticky Notes / <span class="sub-title">Sticky Note Name</span>
+    <span class="edit-btn">
+        <button class="btn btn-primary btn-sm">Edit</button>
+    </span>
+</span>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="background-color: antiquewhite">
+                <div class="card-body">
+                    <h5 class="card-title">Sticky Note Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                        of the
+                        card's content.</p>
+                    <a href="#" class="card-link">View Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
