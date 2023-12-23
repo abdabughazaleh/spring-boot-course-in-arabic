@@ -12,96 +12,48 @@
     <div class="row">
         <div class="col-8">
             <div class="row">
-                <div class="col-4">
-                    <div class="card" style="background-color: antiquewhite">
+                <div class="col-4" th:each="sticky : ${stickyNotes}">
+                    <div class="card" th:styleappend="${'background-color: '+sticky.getColor()}" >
                         <div class="card-body">
-                            <h5 class="card-title">Sticky Note Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
+                            <h5 class="card-title" th:text="${sticky.getName()}"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Created : <span th:text="${sticky.getCreatedAt()}"></span></h6>
+                            <p class="card-text" th:text="${sticky.getDescription()}"></p>
                             <a th:href="@{/sticky-note/1}" class="card-link">View Notes</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="background-color: lightgreen">
-                        <div class="card-body">
-                            <h5 class="card-title">Sticky Note Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <a href="#" class="card-link">View Notes</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="background-color: lightgreen">
-                        <div class="card-body">
-                            <h5 class="card-title">Sticky Note Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <a href="#" class="card-link">View Notes</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="background-color: lightpink">
-                        <div class="card-body">
-                            <h5 class="card-title">Sticky Note Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <a href="#" class="card-link">View Notes</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="background-color: lightblue">
-                        <div class="card-body">
-                            <h5 class="card-title">Sticky Note Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <a href="#" class="card-link">View Notes</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <!--Save form -->
         <div class="col-4">
             <div class="row">
                 <h4>Add New Sticky Note</h4>
                 <div class="col-12">
-                    <div class="form-group">
-                        <label for="sticky_note_name">Sticky Note Name</label>
-                        <input type="text" class="form-control" id="sticky_note_name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="sticky_note_description">Sticky Note Description</label>
-                        <input type="text" class="form-control" id="sticky_note_description" name="description">
-                    </div>
-                    <div class="form-group">
-                        <label for="sticky_note_color">Color </label>
-                        <select name="color" class="form-control" id="sticky_note_color">
-                            <option value="lightblue">Blue</option>
-                            <option value="lightpink">Pink</option>
-                            <option value="antiquewhite">Antique White</option>
-                            <option value="lightgreen"> Green</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <button class="btn btn-primary">
-                            Submit
-                        </button>
-                    </div>
+                    <form action="save" method="post">
+                        <div class="form-group">
+                            <label for="sticky_note_name">Sticky Note Name</label>
+                            <input type="text" class="form-control" id="sticky_note_name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="sticky_note_description">Sticky Note Description</label>
+                            <input type="text" class="form-control" id="sticky_note_description" name="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="sticky_note_color">Color </label>
+                            <select name="color" class="form-control" id="sticky_note_color">
+                                <option value="lightblue">Blue</option>
+                                <option value="lightpink">Pink</option>
+                                <option value="antiquewhite">Antique White</option>
+                                <option value="lightgreen"> Green</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
