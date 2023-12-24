@@ -18,7 +18,7 @@
                             <h5 class="card-title" th:text="${sticky.getName()}"></h5>
                             <h6 class="card-subtitle mb-2 text-muted">Created : <span th:text="${sticky.getCreatedAt()}"></span></h6>
                             <p class="card-text" th:text="${sticky.getDescription()}"></p>
-                            <a th:href="@{/sticky-note/1}" class="card-link">View Notes</a>
+                            <a th:href="@{'/sticky-note/' + ${sticky.getId()} }" class="card-link">View Notes</a>
                         </div>
                     </div>
                 </div>

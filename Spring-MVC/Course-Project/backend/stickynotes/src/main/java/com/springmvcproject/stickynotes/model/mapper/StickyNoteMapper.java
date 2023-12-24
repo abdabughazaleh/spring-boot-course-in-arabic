@@ -2,6 +2,7 @@ package com.springmvcproject.stickynotes.model.mapper;
 
 import com.springmvcproject.stickynotes.model.dto.AddStickyNoteDTO;
 import com.springmvcproject.stickynotes.model.dto.StickyNoteDTO;
+import com.springmvcproject.stickynotes.model.dto.UpdateStickyNoteDTO;
 import com.springmvcproject.stickynotes.model.entity.StickyNote;
 import org.mapstruct.Mapper;
 
@@ -21,4 +22,5 @@ public interface StickyNoteMapper {
 
     AddStickyNoteDTO toAddDto(StickyNote savedEntity);
 
+    StickyNote toEntity(UpdateStickyNoteDTO dto);
 }
