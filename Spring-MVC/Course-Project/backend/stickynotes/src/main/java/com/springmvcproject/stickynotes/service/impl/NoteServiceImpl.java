@@ -31,4 +31,15 @@ public class NoteServiceImpl implements NoteService {
         List<Note> notes = this.noteRepo.findAllByStickyNoteIdOrderByIdDesc(stickyNoteId);
         return this.noteMapper.toDTOs(notes);
     }
+
+    @Override
+    public void delete(Long id) {
+        this.noteRepo.deleteById(id);
+    }
+
+    @Override
+    public List<NoteDTO> getAllNotes() {
+        List<Note> notes = this.noteRepo.findAll();
+        return this.noteMapper.toDTOs(notes);
+    }
 }

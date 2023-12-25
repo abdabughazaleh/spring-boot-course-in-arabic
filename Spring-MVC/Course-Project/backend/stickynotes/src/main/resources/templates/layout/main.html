@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: center">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" th:href="@{/}">Dashboard</a>
+          <a class="nav-link " th:classappend="${urlPath=='/' ? 'active' : '' }" aria-current="page" th:href="@{/}">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/my-notes}">My Notes</a>
+          <a class="nav-link" th:classappend="${urlPath=='/note' ? 'active' : '' }" aria-current="page" th:href="@{/note}">My Notes</a>
         </li>
       </ul>
       <ul class="d-flex navbar-nav">

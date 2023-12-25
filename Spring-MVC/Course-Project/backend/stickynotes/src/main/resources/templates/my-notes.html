@@ -10,13 +10,13 @@
 </span>
 <div layout:fragment="content">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12" th:each="note : ${notes}">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Created : 20/12/2023</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <h6 class="card-subtitle mb-2 text-muted">Created : <span th:text="${note.getCreatedAt()}"></span>
+                    </h6>
+                    <p class="card-text" th:text="${note.getNote()}"></p>
+                    <a th:href="${'/note/delete/'+ note.getId() + '/' + note.getStickyNoteId() }" class="btn btn-sm btn-danger">Delete</a>
                 </div>
             </div>
         </div>

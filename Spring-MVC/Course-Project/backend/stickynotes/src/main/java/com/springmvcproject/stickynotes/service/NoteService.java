@@ -10,4 +10,8 @@ import java.util.List;
 public interface NoteService {
     NoteDTO add(AddNoteDTO dto, Long stickyNoteId);
     List<NoteDTO> getAllNotes(Long stickyNoteId);
+
+    void delete(Long id);
+
+    List<NoteDTO> getAllNotes();
 }

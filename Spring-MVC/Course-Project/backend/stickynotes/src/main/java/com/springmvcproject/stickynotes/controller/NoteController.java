@@ -5,10 +5,10 @@ import com.springmvcproject.stickynotes.model.dto.NoteDTO;
 import com.springmvcproject.stickynotes.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/note")
@@ -20,5 +20,18 @@ public class NoteController {
     public String addNote(@ModelAttribute("dto") AddNoteDTO dto, @PathVariable("stickyNoteId") Long stickyNoteId) {
         this.noteService.add(dto, stickyNoteId);
         return "redirect:/sticky-note/" + stickyNoteId;
+    }
+
+    @GetMapping("/delete/{noteId}/{stickyNoteId}")
+    public String delete(@PathVariable("noteId") Long noteId, @PathVariable("stickyNoteId") Long stickyNoteId) {
+        this.noteService.delete(noteId);
+        return "redirect:/sticky-note/" + stickyNoteId;
+    }
+
+    @GetMapping("")
+    public String myNotes(Model model) {
+        List<NoteDTO> allNotes = this.noteService.getAllNotes();
+        model.addAttribute("notes" , allNotes);
+        return "my-notes";
     }
 }

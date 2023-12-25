@@ -27,10 +27,6 @@ public class StickyNoteController {
         return "home";
     }
 
-    @GetMapping("my-notes")
-    public String myNotes() {
-        return "my-notes";
-    }
 
     @GetMapping("sticky-note/{id}")
     public String stickyNote(@PathVariable(name = "id") Long id, Model model) {

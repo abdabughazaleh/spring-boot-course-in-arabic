@@ -33,7 +33,7 @@ public class StickyNoteServiceImpl implements StickyNoteService {
 
     @Override
     public List<StickyNoteDTO> allStickyNotes() {
-        List<StickyNote> all = this.stickyNoteRepo.findAll();
+        List<StickyNote> all = this.stickyNoteRepo.findAllByStatus(StickyNoteStatus.ACTIVE);
         return this.stickyNoteMapper.toDtos(all);
     }
 
