@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sub-title {
+            color: green;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<span layout:fragment="page-name">
+    Edit Sticky Note [<span th:styleappend="${'color: ' + stickyNote.getColor()}" class="sub-title"
+                            th:text="${stickyNote.getName()}"></span>]
+</span>
+<div layout:fragment="content">
+    <div class="col-4">
+        <div class="row">
+            <form th:action="${'/update/'+ stickyNote.getId() }" method="post">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="sticky_note_name">Sticky Note Name</label>
+                        <input type="text" th:value="${stickyNote.getName()}" class="form-control" id="sticky_note_name"
+                               name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="sticky_note_description">Sticky Note Description</label>
+                        <input type="text" th:value="${stickyNote.getDescription()}" class="form-control"
+                               id="sticky_note_description" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="sticky_note_color" th:styleappend="${'color: ' + stickyNote.getColor()}">
+                            Color </label>
+                        <select name="color" class="form-control" id="sticky_note_color">
+                            <option th:selected="${stickyNote.getColor() == 'lightblue'}" value="lightblue">Blue
+                            </option>
+                            <option th:selected="${stickyNote.getColor() == 'lightpink'}" value="lightpink">Pink
+                            </option>
+                            <option th:selected="${stickyNote.getColor() == 'antiquewhite'}" value="antiquewhite">
+                                Antique White
+                            </option>
+                            <option th:selected="${stickyNote.getColor() == 'lightgreen'}" value="lightgreen"> Green
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sticky_note_status">Status </label>
+                        <select name="status" class="form-control" id="sticky_note_status">
+                            <option th:selected="${stickyNote.getStatus().toString() == 'ACTIVE'}" value="ACTIVE">Active</option>
+                            <option th:selected="${stickyNote.getStatus().toString() == 'DISABLED'}" value="DISABLED">Disabled
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

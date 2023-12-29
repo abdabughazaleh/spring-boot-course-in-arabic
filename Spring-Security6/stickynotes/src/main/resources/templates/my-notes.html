@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span layout:fragment="page-name">
+    MY NOTES
+</span>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-12" th:each="note : ${notes}">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Created : <span th:text="${note.getCreatedAt()}"></span>
+                    </h6>
+                    <p class="card-text" th:text="${note.getNote()}"></p>
+                    <a th:href="${'/note/delete/'+ note.getId() + '/' + note.getStickyNoteId() }" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

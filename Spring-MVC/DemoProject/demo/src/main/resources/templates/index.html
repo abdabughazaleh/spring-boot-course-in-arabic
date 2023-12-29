@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="layout/main">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
+<h1>welcome</h1>
+<span class="username" th:text="${username}"></span>
 
+<div  layout:fragment="content">
+        asfasf
+</div>
 </body>
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span layout:fragment="page-name">Home Page</span>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-4" th:each="sticky : ${stickyNotes}">
+                    <div class="card" th:styleappend="${'background-color: '+sticky.getColor()}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${sticky.getName()}"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Created : <span
+                                    th:text="${sticky.getCreatedAt()}"></span></h6>
+                            <p class="card-text" th:text="${sticky.getDescription()}"></p>
+                            <a th:href="@{'/sticky-note/' + ${sticky.getId()} }" class="card-link">View Notes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Save form -->
+        <div class="col-4">
+            <div class="row">
+                <h4>Add New Sticky Note</h4>
+                <div class="col-12">
+                    <form action="save" method="post">
+                        <div class="form-group">
+                            <label for="sticky_note_name">Sticky Note Name</label>
+                            <input type="text" class="form-control" id="sticky_note_name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="sticky_note_description">Sticky Note Description</label>
+                            <input type="text" class="form-control" id="sticky_note_description" name="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="sticky_note_color">Color </label>
+                            <select name="color" class="form-control" id="sticky_note_color">
+                                <option value="lightblue">Blue</option>
+                                <option value="lightpink">Pink</option>
+                                <option value="antiquewhite">Antique White</option>
+                                <option value="lightgreen"> Green</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -9,6 +9,7 @@ import java.util.List;
 
 @RequestMapping(path = "/products")
 @RestController
+@CrossOrigin
 public class ProductController {
     @Autowired
     private ProductDao productDao;
