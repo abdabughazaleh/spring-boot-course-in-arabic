@@ -7,7 +7,6 @@ import com.springmvcproject.stickynotes.model.dto.UpdateStickyNoteDTO;
 import com.springmvcproject.stickynotes.service.NoteService;
 import com.springmvcproject.stickynotes.service.StickyNoteService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

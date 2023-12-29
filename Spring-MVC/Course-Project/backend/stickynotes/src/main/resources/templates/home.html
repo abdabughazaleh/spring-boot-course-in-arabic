@@ -5,18 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<span layout:fragment="page-name">
-    Home Page
-</span>
+<span layout:fragment="page-name">Home Page</span>
 <div layout:fragment="content">
     <div class="row">
         <div class="col-8">
             <div class="row">
                 <div class="col-4" th:each="sticky : ${stickyNotes}">
-                    <div class="card" th:styleappend="${'background-color: '+sticky.getColor()}" >
+                    <div class="card" th:styleappend="${'background-color: '+sticky.getColor()}">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${sticky.getName()}"></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Created : <span th:text="${sticky.getCreatedAt()}"></span></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Created : <span
+                                    th:text="${sticky.getCreatedAt()}"></span></h6>
                             <p class="card-text" th:text="${sticky.getDescription()}"></p>
                             <a th:href="@{'/sticky-note/' + ${sticky.getId()} }" class="card-link">View Notes</a>
                         </div>
