@@ -19,13 +19,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: center">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="isAuthenticated()">
           <a class="nav-link " th:classappend="${urlPath=='/' ? 'active' : '' }" aria-current="page" th:href="@{/}">Dashboard</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="isAuthenticated()">
           <a class="nav-link" th:classappend="${urlPath=='/note' ? 'active' : '' }" aria-current="page" th:href="@{/note}">My Notes</a>
         </li>
-        <li class="nav-item">
+        <li  class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
           <a class="nav-link" th:classappend="${urlPath=='/users' ? 'active' : '' }" aria-current="page" th:href="@{/users}">Users</a>
         </li>
         <li class="nav-item">
@@ -33,14 +33,14 @@
         </li>
       </ul>
       <ul class="d-flex navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="isAuthenticated()">
           <a class="nav-link" aria-current="page" href="#">Profile</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Logout</a>
+        <li class="nav-item" sec:authorize="!isAuthenticated()">
+          <a class="nav-link" aria-current="page" th:href="@{/}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Login</a>
+          <a class="nav-link" aria-current="page" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
         </li>
       </ul>
     </div>
