@@ -1,6 +1,6 @@
-package com.springmvcproject.stickynotes.repository;
+package com.springsecurity.jwttoken.repository;
 
-import com.springmvcproject.stickynotes.model.entity.UserEntity;
+import com.springsecurity.jwttoken.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

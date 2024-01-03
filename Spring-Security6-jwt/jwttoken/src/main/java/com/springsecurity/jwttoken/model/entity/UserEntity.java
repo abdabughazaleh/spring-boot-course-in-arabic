@@ -1,4 +1,4 @@
-package com.springmvcproject.stickynotes.model.entity;
+package com.springsecurity.jwttoken.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

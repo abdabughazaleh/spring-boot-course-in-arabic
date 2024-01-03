@@ -1,7 +1,7 @@
-package com.springmvcproject.stickynotes.config;
+package com.springsecurity.jwttoken.config;
 
-import com.springmvcproject.stickynotes.model.entity.UserEntity;
-import com.springmvcproject.stickynotes.repository.UserRepo;
+import com.springsecurity.jwttoken.model.entity.UserEntity;
+import com.springsecurity.jwttoken.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

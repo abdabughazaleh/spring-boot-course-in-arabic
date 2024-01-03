@@ -1,4 +1,4 @@
-package com.springmvcproject.stickynotes.config;
+package com.springsecurity.jwttoken.config;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
